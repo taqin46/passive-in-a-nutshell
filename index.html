@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif: Tukar Posisi Superhero (Passive Voice)</title>
+    
+    <!-- Script MathJax untuk merender LaTeX -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']],
+          displayMath: [['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --primary: #4a90e2;
+            --a1-color: #2ecc71;
+            --a2-color: #f1c40f;
+            --b1-color: #e67e22;
+            --b2-color: #e74c3c;
+            --toefl-color: #9b59b6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.5em; }
+        .subtitle { font-size: 1.2em; margin-top: 10px; font-weight: 300; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary);
+        }
+
+        .card h2 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        
+        .level-a1 { border-left-color: var(--a1-color); }
+        .level-a1 h2 { color: var(--a1-color); }
+        .level-a2 { border-left-color: var(--a2-color); }
+        .level-a2 h2 { color: #d4ac0d; }
+        .level-b1 { border-left-color: var(--b1-color); }
+        .level-b1 h2 { color: var(--b1-color); }
+        .level-b2 { border-left-color: var(--b2-color); }
+        .level-b2 h2 { color: var(--b2-color); }
+        .level-toefl { border-left-color: var(--toefl-color); }
+        .level-toefl h2 { color: var(--toefl-color); }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .question-block {
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+        
+        .question-block p { margin: 0 0 10px 0; font-weight: bold;}
+        
+        .quiz-options label {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-options label:hover {
+            background: #eef2f5;
+            border-color: #b0c4de;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .check-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .check-btn:hover {
+            background: #357abd;
+        }
+
+        .result-box {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #e8f4f8;
+            border-left: 6px solid #3498db;
+        }
+
+        .result-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .highlight { font-weight: bold; color: var(--primary); }
+        .danger { font-weight: bold; color: var(--b2-color); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🦸‍♂️ Permainan Tukar Posisi Superhero</h1>
+        <div class="subtitle">Halo! Bayangkan kita sedang belajar bersama di dalam kelas yang seru! Biar kamu cepat paham, kita akan membayangkan Kalimat Pasif (Passive Voice) ini seperti sebuah permainan tukar peran.</div>
+    </header>
+
+    <div class="card">
+        <h2>🐱 Awal Cerita: Apa itu Kalimat Aktif vs. Pasif?</h2>
+        <ul>
+            <li><strong>Kalimat Aktif (Si Pelaku Jadi Bintang Utama):</strong> "Kucing mengejar Tikus." <em>(Kucing yang pamer aksi mengejar!)</em>.</li>
+            <li><strong>Kalimat Pasif (Si Korban Ditolong Jadi Bintang Utama):</strong> "Tikus dikejar oleh Kucing." <em>(Tikus yang jadi pusat perhatian kita!)</em>.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>💡 Aturan Emas Superhero (Syarat Utama)</h2>
+        <ol>
+            <li><strong>Harus Ada Aksi (Action Verb):</strong> Kata kerja yang ada gerakannya (makan, memukul, membuka, menggambar).</li>
+            <li><strong>Harus Ada Korban/Objek (Transitive Verb):</strong> Kata kerja yang butuh sasaran.
+                <ul>
+                    <li><span class="highlight">Bisa dipasifkan:</span> Makan nasi \(\rightarrow\) Nasi dimakan. (Ada nasinya!).</li>
+                    <li><span class="danger">TIDAK BISA dipasifkan:</span> Tidur, Datang, Terjadi, Meninggal. (Nggak ada korbannya!).</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <!-- LEVEL A1 -->
+    <div class="card level-a1">
+        <h2>🟢 LEVEL A1 (Beginner - Kejadian Hari Ini / Simple Present)</h2>
+        <p>Di level ini, kita bicara tentang kejadian sehari-hari atau fakta umum.</p>
+        
+        <h3>1. Things to Remember (A1)</h3>
+        <ul>
+            <li>Di bahasa Indonesia, pasif pakai awalan <strong>di-</strong> (dimakan, dibaca, dibuka).</li>
+            <li>Di bahasa Inggris, kata kerjanya wajib pakai <strong>Verb 3 (\(V_3\))</strong> dan ditemani robot pembantu <strong>Am / Is / Are</strong>.</li>
+            <li>\(\text{Am} \rightarrow \text{I}\) | \(\text{Is} \rightarrow \text{1 benda}\) | \(\text{Are} \rightarrow \text{>1 benda}\)</li>
+        </ul>
+
+        <div class="formula-box">
+            <strong>Rumus:</strong>
+            \[\text{Active: } \text{Subject} + \text{Verb}_1\text{(s/es)} + \text{Object}\]
+            \[\text{Passive: } \text{Object (New Subject)} + \left(\begin{array}{c} \text{am} \\ \text{is} \\ \text{are} \end{array}\right) + \text{Verb}_3 + (\text{by Agent})\]
+        </div>
+
+        <h3>2. Quiz (A1 - 10 Soal)</h3>
+        <form id="quiz-form-a1">
+            <!-- Questions 1-10 -->
+            <script>
+                const qA1 = [
+                    {q: "Active: The sun warms the Earth.<br>Passive: The Earth _____ by the sun.", opts: ["is warmed", "are warmed", "warm", "is warm"]},
+                    {q: "Active: Farmers grow rice in the field.<br>Passive: Rice _____ by farmers in the field.", opts: ["are grown", "is grown", "grows", "is grow"]},
+                    {q: "Active: She cleans the bedroom every morning.<br>Passive: The bedroom _____ every morning.", opts: ["is cleaned", "are cleaned", "clean", "is cleaning"]},
+                    {q: "Active: Students read English books in the library.<br>Passive: English books _____ by students in the library.", opts: ["is read", "are read", "reads", "are reading"]},
+                    {q: "Active: My mother cooks delicious soup.<br>Passive: Delicious soup _____ by my mother.", opts: ["is cooked", "are cooked", "cook", "is cook"]},
+                    {q: "Active: The teacher helps the children.<br>Passive: The children _____ by the teacher.", opts: ["is helped", "helped", "are helped", "is help"]},
+                    {q: "Active: Rain waters the green plants.<br>Passive: Green plants _____ by rain.", opts: ["are watered", "is watered", "waters", "are water"]},
+                    {q: "Active: He washes his bicycle every Sunday.<br>Passive: His bicycle _____ every Sunday.", opts: ["is washed", "are washed", "wash", "is washing"]},
+                    {q: "Active: Budi feeds the cats.<br>Passive: The cats _____ by Budi.", opts: ["is fed", "are fed", "feed", "is feed"]},
+                    {q: "Active: They open the school gate at 6 AM.<br>Passive: The school gate _____ at 6 AM.", opts: ["is opened", "are opened", "opens", "is open"]}
+                ];
+                let letters = ['A','B','C','D'];
+                qA1.forEach((item, i) => {
+                    document.write(`<div class="question-block"><p>${i+1}. ${item.q}</p><div class="quiz-options">`);
+                    item.opts.forEach((opt, j) => {
+                        document.write(`<label><input type="radio" name="q-a1-${i+1}" value="${letters[j]}"> ${letters[j]}. ${opt}</label>`);
+                    });
+                    document.write(`</div></div>`);
+                });
+            </script>
+            <button type="button" class="check-btn" onclick="checkAnswers('a1')">Kumpulkan & Cek Nilai A1</button>
+        </form>
+        <div id="result-a1" class="result-box"></div>
+    </div>
+
+    <!-- LEVEL A2 -->
+    <div class="card level-a2">
+        <h2>🟡 LEVEL A2 (Elementary - Masa Lalu & Masa Depan)</h2>
+        <p>Di level ini, waktu perbuatannya bisa kemarin (Past) atau besok (Future).</p>
+        
+        <h3>1. Things to Remember (A2)</h3>
+        <ul>
+            <li>Kejadian kemarin (Past), pakai robot pembantu: <strong>Was</strong> (1 benda) atau <strong>Were</strong> (banyak benda).</li>
+            <li>Kejadian besok (Future), pakai robot pembantu: <strong>Will be</strong>.</li>
+        </ul>
+
+        <div class="formula-box">
+            <strong>Rumus:</strong>
+            \[\text{Past Passive: } \text{Object} + \left(\begin{array}{c} \text{was} \\ \text{were} \end{array}\right) + \text{Verb}_3\]
+            \[\text{Future Passive: } \text{Object} + \text{will be} + \text{Verb}_3\]
+        </div>
+
+        <h3>2. Quiz (A2 - 10 Soal)</h3>
+        <form id="quiz-form-a2">
+            <script>
+                const qA2 = [
+                    {q: "Active: A sudden storm destroyed two houses yesterday.<br>Passive: Two houses _____ by a sudden storm yesterday.", opts: ["was destroyed", "were destroyed", "is destroyed", "will be destroyed"]},
+                    {q: "Active: Alexander Fleming discovered penicillin in 1928.<br>Passive: Penicillin _____ by Alexander Fleming in 1928.", opts: ["was discovered", "were discovered", "is discovered", "will be discovered"]},
+                    {q: "Active: Someone stole my wallet on the bus last night.<br>Passive: My wallet _____ on the bus last night.", opts: ["were stolen", "was stolen", "is stolen", "will be stolen"]},
+                    {q: "Active: The government will build a new bridge next month.<br>Passive: A new bridge _____ next month.", opts: ["was built", "is built", "will be built", "were built"]},
+                    {q: "Active: The principal announced the test results this morning.<br>Passive: The test results _____ this morning.", opts: ["were announced", "was announced", "will be announced", "are announced"]},
+                    {q: "Active: The mechanic fixed my car two days ago.<br>Passive: My car _____ two days ago.", opts: ["were fixed", "was fixed", "is fixed", "will be fixed"]},
+                    {q: "Active: The teacher will grade our essays tomorrow.<br>Passive: Our essays _____ tomorrow.", opts: ["will be graded", "were graded", "was graded", "are graded"]},
+                    {q: "Active: A high wave washed away the sandcastle.<br>Passive: The sandcastle _____ away by a high wave.", opts: ["was washed", "were washed", "will be washed", "is washed"]},
+                    {q: "Active: They will send the package next Monday.<br>Passive: The package _____ next Monday.", opts: ["will be sent", "was sent", "were sent", "is sent"]},
+                    {q: "Active: An earthquake shook the island in 1990.<br>Passive: The island _____ by an earthquake in 1990.", opts: ["were shaken", "was shaken", "is shaken", "will be shaken"]}
+                ];
+                qA2.forEach((item, i) => {
+                    document.write(`<div class="question-block"><p>${i+1}. ${item.q}</p><div class="quiz-options">`);
+                    item.opts.forEach((opt, j) => {
+                        document.write(`<label><input type="radio" name="q-a2-${i+1}" value="${letters[j]}"> ${letters[j]}. ${opt}</label>`);
+                    });
+                    document.write(`</div></div>`);
+                });
+            </script>
+            <button type="button" class="check-btn" onclick="checkAnswers('a2')">Kumpulkan & Cek Nilai A2</button>
+        </form>
+        <div id="result-a2" class="result-box"></div>
+    </div>
+
+    <!-- LEVEL B1 -->
+    <div class="card level-b1">
+        <h2>🟠 LEVEL B1 (Intermediate - Sedang & Telah Terjadi, Modals)</h2>
+        
+        <h3>1. Things to Remember (B1)</h3>
+        <ul>
+            <li><strong>Sedang Terjadi (Continuous):</strong> Tambahkan <strong>being</strong> di tengah.</li>
+            <li><strong>Sudah Selesai (Perfect):</strong> Tambahkan <strong>been</strong> di tengah.</li>
+            <li><strong>Kata Modal (Can, Must, Should):</strong> Ikuti dengan <strong>be + \(V_3\)</strong>.</li>
+        </ul>
+
+        <div class="formula-box">
+            <strong>Rumus:</strong>
+            \[\text{Continuous Passive: } \text{Object} + \left(\begin{array}{c} \text{am/is/are} \\ \text{was/were} \end{array}\right) + \text{being} + \text{Verb}_3\]
+            \[\text{Perfect Passive: } \text{Object} + \left(\begin{array}{c} \text{has} \\ \text{have} \end{array}\right) + \text{been} + \text{Verb}_3\]
+            \[\text{Modal Passive: } \text{Object} + \text{Modal} + \text{be} + \text{Verb}_3\]
+        </div>
+
+        <h3>2. Quiz (B1 - 10 Soal)</h3>
+        <form id="quiz-form-b1">
+            <script>
+                const qB1 = [
+                    {q: "Look! The old wooden house _____ down right now.", opts: ["is being pulled", "has been pulled", "must be pulled", "was pulled"]},
+                    {q: "All the homework assignments _____ by the students already.", opts: ["is being submitted", "have been submitted", "must submit", "was submit"]},
+                    {q: "Toxic industrial waste _____ carefully before it goes to the river.", opts: ["must be treated", "has been treat", "is being treat", "were treated"]},
+                    {q: "Shhh! A very secret report _____ by the manager at this moment.", opts: ["has been read", "is being read", "must read", "was read"]},
+                    {q: "The new scientific book _____ into five languages since last year.", opts: ["is being translated", "has been translated", "should translate", "was translate"]},
+                    {q: "Safety helmets _____ by all workers inside the factory.", opts: ["must be worn", "has been worn", "is being wear", "were wear"]},
+                    {q: "Listen! A beautiful song _____ by the choir in the hall right now.", opts: ["has been sung", "is being sung", "must be sing", "was sing"]},
+                    {q: "Many trees _____ in the park since 2020.", opts: ["have been planted", "is being planted", "should plant", "was planted"]},
+                    {q: "Plastic bottles _____ recycled to protect our environment.", opts: ["should be", "should be recycled", "has been recycle", "is being recycle"]},
+                    {q: "The delicious cake _____ by my chef brother right now.", opts: ["is being baked", "has been baked", "must bake", "was bake"]}
+                ];
+                qB1.forEach((item, i) => {
+                    document.write(`<div class="question-block"><p>${i+1}. ${item.q}</p><div class="quiz-options">`);
+                    item.opts.forEach((opt, j) => {
+                        document.write(`<label><input type="radio" name="q-b1-${i+1}" value="${letters[j]}"> ${letters[j]}. ${opt}</label>`);
+                    });
+                    document.write(`</div></div>`);
+                });
+            </script>
+            <button type="button" class="check-btn" onclick="checkAnswers('b1')">Kumpulkan & Cek Nilai B1</button>
+        </form>
+        <div id="result-b1" class="result-box"></div>
+    </div>
+
+    <!-- LEVEL B2 -->
+    <div class="card level-b2">
+        <h2>🔴 LEVEL B2 (Upper-Intermediate - Kausatif & Jebakan!)</h2>
+        
+        <h3>1. Things to Remember (B2)</h3>
+        <ul>
+            <li><strong>Passive Causative (Menyuruh Orang Lain):</strong><br> \(\text{Subject} + \text{have / get} + \text{Object} + \text{Verb}_3\)</li>
+            <li><span class="danger">⚠️ JEBAKAN KATA KERJA INTRANSITIVE:</span> Kata <em>happen, occur, arrive, disappear</em> <strong>TIDAK BOLEH</strong> dipasifkan!</li>
+        </ul>
+
+        <h3>2. Quiz (B2 - 10 Soal)</h3>
+        <form id="quiz-form-b2">
+            <script>
+                const qB2 = [
+                    {q: "I didn't cut my hair myself; I _____ yesterday at the salon.", opts: ["had my hair cut", "cut my hair", "was cut my hair", "have cut my hair"]},
+                    {q: "A terrible earthquake _____ near the coast early yesterday morning.", opts: ["was happened", "happened", "was happening", "has been happened"]},
+                    {q: "The manager will get the monthly financial summary _____ by his secretary.", opts: ["prepare", "prepared", "to prepare", "preparing"]},
+                    {q: "It _____ that regular exercise reduces the risk of heart disease.", opts: ["is believed", "believes", "was believing", "has believed"]},
+                    {q: "The missing dinosaur fossils _____ mysteriously two weeks ago.", opts: ["were disappeared", "disappeared", "have been disappeared", "were disappearing"]},
+                    {q: "She needs to have her broken laptop _____ before the exam.", opts: ["repair", "repaired", "repairing", "to repair"]},
+                    {q: "The package _____ at the post office early this morning.", opts: ["was arrived", "arrived", "has been arrived", "was arriving"]},
+                    {q: "It _____ by scientists that global temperatures will continue to rise.", opts: ["is expected", "expects", "expecting", "has expected"]},
+                    {q: "My father had his house _____ with bright yellow paint last week.", opts: ["painted", "paint", "painting", "to paint"]},
+                    {q: "Mana kalimat yang BENAR di bawah ini?", opts: ["The sudden flood was occurred in the village.", "The sudden flood occurred in the village.", "The sudden flood was occur in the village.", "The sudden flood is occurred in the village."]}
+                ];
+                qB2.forEach((item, i) => {
+                    document.write(`<div class="question-block"><p>${i+1}. ${item.q}</p><div class="quiz-options">`);
+                    item.opts.forEach((opt, j) => {
+                        document.write(`<label><input type="radio" name="q-b2-${i+1}" value="${letters[j]}"> ${letters[j]}. ${opt}</label>`);
+                    });
+                    document.write(`</div></div>`);
+                });
+            </script>
+            <button type="button" class="check-btn" onclick="checkAnswers('b2')">Kumpulkan & Cek Nilai B2</button>
+        </form>
+        <div id="result-b2" class="result-box"></div>
+    </div>
+
+    <!-- LEVEL TOEFL -->
+    <div class="card level-toefl">
+        <h2>⚡ LEVEL TOEFL (Master Level - Inversi Pasif)</h2>
+        
+        <h3>1. Things to Remember (TOEFL)</h3>
+        <p>Jika kalimat diawali kata penanda khusus (seperti <em>Never, Seldom, Rarely, Hardly</em>) atau keterangan tempat (<em>On top of the hill</em>), maka verb pasif LOMPAT mendahului subjek!</p>
+
+        <div class="formula-box">
+            <strong>Rumus:</strong>
+            \[\text{Negative Word} + \text{Auxiliary} + \text{Subject} + \text{been / Verb}_3\]
+        </div>
+
+        <h3>2. Quiz (TOEFL - 10 Soal)</h3>
+        <form id="quiz-form-toefl">
+            <script>
+                const qToefl = [
+                    {q: "Seldom _____ such a severe hurricane been recorded in this region.", opts: ["has", "is", "was", "had"]},
+                    {q: "On top of the snow-capped mountain _____ a modern weather station.", opts: ["was constructed", "constructed", "it was constructed", "were constructed"]},
+                    {q: "Rarely _____ such brilliant scientific discoveries made by a student.", opts: ["are", "is", "was", "has"]},
+                    {q: "_____ the safety rules been followed properly, the factory explosion would have been avoided.", opts: ["Had", "If had", "Were", "Should"]},
+                    {q: "Only after official approval _____ the research paper be published.", opts: ["will", "is", "has", "was"]},
+                    {q: "In the center of the town hall _____ built a magnificent bronze statue.", opts: ["was", "were", "has", "is"]},
+                    {q: "Never before _____ so many ancient artifacts been displayed in one museum.", opts: ["have", "has", "is", "was"]},
+                    {q: "_____ any toxic chemicals be released, the emergency alarm will ring instantly.", opts: ["Should", "Had", "If should", "Were"]},
+                    {q: "Hardly _____ the new bridge completed when a sudden flood washed it away.", opts: ["had", "was", "is", "has"]},
+                    {q: "Deep inside the dark cave _____ discovered several prehistoric cave paintings.", opts: ["were", "was", "is", "has"]}
+                ];
+                qToefl.forEach((item, i) => {
+                    document.write(`<div class="question-block"><p>${i+1}. ${item.q}</p><div class="quiz-options">`);
+                    item.opts.forEach((opt, j) => {
+                        document.write(`<label><input type="radio" name="q-toefl-${i+1}" value="${letters[j]}"> ${letters[j]}. ${opt}</label>`);
+                    });
+                    document.write(`</div></div>`);
+                });
+            </script>
+            <button type="button" class="check-btn" onclick="checkAnswers('toefl')">Kumpulkan & Cek Nilai TOEFL</button>
+        </form>
+        <div id="result-toefl" class="result-box"></div>
+    </div>
+
+</div>
+
+<!-- Logika Penilaian Kuis (JavaScript) -->
+<script>
+    // Kunci Jawaban
+    const answerKeys = {
+        'a1': ['A', 'B', 'A', 'B', 'A', 'C', 'A', 'A', 'B', 'A'],
+        'a2': ['B', 'A', 'B', 'C', 'A', 'B', 'A', 'A', 'A', 'B'],
+        'b1': ['A', 'B', 'A', 'B', 'B', 'A', 'B', 'A', 'B', 'A'],
+        'b2': ['A', 'B', 'B', 'A', 'B', 'B', 'B', 'A', 'A', 'B'],
+        'toefl': ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A']
+    };
+
+    function checkAnswers(level) {
+        let score = 0;
+        let wrongAnswers = [];
+        const correctAns = answerKeys[level];
+
+        for (let i = 1; i <= 10; i++) {
+            const selected = document.querySelector(`input[name="q-${level}-${i}"]:checked`);
+            
+            if (selected) {
+                if (selected.value === correctAns[i - 1]) {
+                    score += 10;
+                    // Beri warna hijau pada jawaban benar
+                    selected.parentElement.style.backgroundColor = '#d4edda';
+                    selected.parentElement.style.borderColor = '#c3e6cb';
+                } else {
+                    wrongAnswers.push(i);
+                    // Beri warna merah pada jawaban salah
+                    selected.parentElement.style.backgroundColor = '#f8d7da';
+                    selected.parentElement.style.borderColor = '#f5c6cb';
+                }
+            } else {
+                wrongAnswers.push(i); // Tidak diisi dihitung salah
+            }
+        }
+
+        // Tampilkan Hasil
+        const resultBox = document.getElementById(`result-${level}`);
+        resultBox.style.display = 'block';
+        
+        let feedbackHTML = `<h3>Nilai Kamu: ${score} / 100 🎯</h3>`;
+        
+        if (score === 100) {
+            feedbackHTML += `<p>Luar biasa! Sempurna! 🎉 Kamu sudah menguasai level ini.</p>`;
+        } else if (score >= 70) {
+            feedbackHTML += `<p>Bagus sekali! Namun masih ada sedikit kesalahan di nomor: <strong>${wrongAnswers.join(', ')}</strong>. Yuk perhatikan polanya lagi!</p>`;
+        } else {
+            feedbackHTML += `<p>Tetap semangat! Yuk pelajari rumusnya lagi. Kamu perlu mengecek kembali soal nomor: <strong>${wrongAnswers.join(', ')}</strong>.</p>`;
+        }
+
+        resultBox.innerHTML = feedbackHTML;
+
+        // Kunci input agar tidak bisa diubah lagi setelah disubmit
+        const allInputs = document.querySelectorAll(`input[name^="q-${level}-"]`);
+        allInputs.forEach(input => {
+            input.disabled = true;
+        });
+        
+        // Disable tombol cek
+        const btn = document.querySelector(`#quiz-form-${level} .check-btn`);
+        btn.disabled = true;
+        btn.style.backgroundColor = '#95a5a6';
+        btn.innerText = 'Nilai Sudah Dicek ✔️';
+    }
+</script>
+
+</body>
+</html>
